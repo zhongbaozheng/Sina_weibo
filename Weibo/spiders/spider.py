@@ -29,13 +29,7 @@ class Spider(scrapy.Spider):
 	1854627907, 1764222885, 1263498570, 1568006292, 1191220232, 1195230310, 2865101843, 1191262305]
 
 	def __init__(self, name=None, **kwargs):
-		if name is not None:
-			self.name = name
-		elif not getattr(self, 'name', None):
-			raise ValueError("%s must have a name" % type(self).__name__)
-		self.__dict__.update(kwargs)
-		if not hasattr(self, 'start_urls'):
-			self.start_urls = []
+		super(Spider, self).__init__(name, **kwargs)
 		self.cnx = mysql.connector.connect(user='root', password='xxx', database='sina_weibo', host='localhost')
 		self.cur =self.cnx.cursor()
 
